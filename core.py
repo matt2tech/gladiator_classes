@@ -1,13 +1,13 @@
 from random import randint
 from time import sleep
 
-# balanced gladiator: Gladiator(name, 100, 0, 100, 5, 15, 15, 65)
-# name, health, total rage, maximum rage, lowest damage, highest damage, evasion percentage
+# balanced gladiator: Gladiator(name, 100, 100, 0, 100, 5, 15, 15, 65)
+# name, health, maximum health, total rage, maximum rage, lowest damage, highest damage, evasion percentage
 
 
 # berserker class: Gladiator(name, 100, 100, 0, 150, 15, 20, 15, 15)
-# bladedancer class: Gladiator(name, 85, 85, 30, 100, 5, 10, 70, 70)
-# vanguard class: Gladiator(name, 150, 150, 0, 100, 5, 15, 30, 30)
+# bladedancer class: Gladiator(name, 85, 85, 40, 100, 10, 10, 65, 65)
+# vanguard class: Gladiator(name, 150, 150, 0, 100, 10, 15, 25, 25)
 class Gladiator():
     '''Represents a gladiator.
 
@@ -102,7 +102,7 @@ class Gladiator():
         of damage to the defender.
         '''
 
-        if self.rage == 100:
+        if self.rage >= 100:
             attack = randint(self.damage_low, self.damage_high)
             accuracy = randint(1, 100)
             if accuracy > defender.evasion + 20:
@@ -367,7 +367,7 @@ class Scene():
         sleep(0.1)
         print('                        | | |               ::::::| | |')
         sleep(0.1)
-        print('                        | | |      𝓒𝓗𝓐𝓜𝓟𝓘𝓞𝓝 ::::::| | |')
+        print('                        | | |      𝓒𝓗𝓐𝓜 𝓟𝓘𝓞𝓝 :::::| | |')
         sleep(0.1)
         print('                         \ \|    𝓞𝓕 𝓣𝓗𝓔 𝓐𝓡𝓔𝓝𝓐 ::::|/ /')
         sleep(0.1)
