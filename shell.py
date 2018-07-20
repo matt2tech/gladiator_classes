@@ -119,14 +119,14 @@ def battle(player_1, player_2):
 
 
 def main():
-    # Scene.start_menu()
-    # Scene.loading_screen()
-    # Scene.sign_up()
+    Scene.start_menu()
+    Scene.loading_screen()
+    Scene.sign_up()
     name_1 = get_name_1()
     name_2 = get_name_2()
     player_1 = player(name_1)
     player_2 = player(name_2)
-    # name_1.battle_announce(name_2)
+    name_1.battle_announce(name_2)
     battle(player_1, player_2)
     Scene.trophy()
     name_1.credits(name_2)
