@@ -67,7 +67,7 @@ class Gladiator():
                 self.rage = 0
             else:
                 defender.health = max(defender.health - attack, 0)
-                self.rage = min(self.rage + self.maximum_rage / 10,
+                self.rage = min(self.rage + self.maximum_rage // 10,
                                 self.maximum_rage)
                 print('{} hit {}'.format(self.name, defender.name))
                 print('"{} dealt {} DMG"'.format(self.name, attack))
@@ -165,7 +165,7 @@ class Gladiator():
         Gladiator will do nothing for their turn but will gain more rage than from attacking.
         '''
 
-        self.rage = min(self.rage + self.maximum_rage / 5, self.maximum_rage)
+        self.rage = min(self.rage + self.maximum_rage // 5, self.maximum_rage)
         print('{} is waiting'.format(self.name))
         print('(ง-_-)ง')
 
