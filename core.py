@@ -1,20 +1,30 @@
 from random import randint
 from time import sleep
 
+# balanced gladiator: Gladiator(name, 100, 0, 100, 5, 15, 15, 65)
+# name, health, total rage, maximum rage, lowest damage, highest damage, evasion percentage
 
+
+# berserker class: Gladiator(name, 100, 100, 0, 150, 15, 20, 15)
+# bladedancer class: Gladiator(name, 80, 80, 40, 100, 5, 10, 65)
+# vanguard class: Gladiator(name, 150, 150, 0, 100, 5, 15, 30)
 class Gladiator():
     '''Represents a gladiator.
 
-    Each gladiator has a name, health, rage, a range of damage, and evasion rate.
+    Each gladiator has a name, health, maximum health, rage, maximum rage, a range of damage, evasion, base evasion.
     '''
 
-    def __init__(self, name, health, rage, damage_low, damage_high, evasion):
+    def __init__(self, name, health, maximum_health, rage, maximum_rage,
+                 damage_low, damage_high, evasion, base_evasion):
         self.name = name
         self.health = health
+        self.maximum_health = maximum_health
         self.rage = rage
+        self.maximum_rage = maximum_rage
         self.damage_low = damage_low
         self.damage_high = damage_high
         self.evasion = evasion
+        self.base_evasion = base_evasion
 
     def __str__(self):
         ''' (Gladiator) -> str
@@ -32,9 +42,10 @@ class Gladiator():
         Returns a string representation of this Gladiator.
         '''
 
-        return 'Gladiator(\'{}\', {}, {}, {}, {}, {})'.format(
-            self.name, self.health, self.rage, self.damage_low,
-            self.damage_high, self.evasion)
+        return 'Gladiator(\'{}\', {}, {}, {}, {}, {}, {}, {}, {})'.format(
+            self.name, self.health, self.maximum_health, self.rage,
+            self.maximum_rage, self.damage_low, self.damage_high, self.evasion,
+            self.base_evasion)
 
     def attack(self, defender):
         ''' (Gladiator, Gladiator) -> NoneType
@@ -56,7 +67,8 @@ class Gladiator():
                 self.rage = 0
             else:
                 defender.health = max(defender.health - attack, 0)
-                self.rage = min(self.rage + 10, 100)
+                self.rage = min(self.rage + self.maximum_rage / 10,
+                                self.maximum_rage)
                 print('{} hit {}'.format(self.name, defender.name))
                 print('"{} dealt {} DMG"'.format(self.name, attack))
                 print('( ಠ_ಠ)⊃o-|===>(ಠ╭╮ಠ )')
@@ -64,7 +76,6 @@ class Gladiator():
         else:
             print('{} evaded'.format(defender.name))
             print('( ÒДÓ)⊃o-|===> ε=ε=ε=┌( ^-^)ﾉ')
-            self.rage = max(self.rage - 10, 0)
 
     def heal(self):
         ''' (Gladiator) -> NoneType
@@ -73,7 +84,8 @@ class Gladiator():
         is 80% of the total rage.
         '''
         if self.rage > 0:
-            self.health = min(self.health + int(self.rage * 0.8), 100)
+            self.health = min(self.health + int(self.rage * 0.8),
+                              self.maximum_health)
             self.rage -= self.rage
             print('{} drunk a potion'.format(self.name))
             print('(* .*)=[HP^]')
@@ -91,14 +103,15 @@ class Gladiator():
         '''
 
         if self.rage == 100:
+            attack = randint(self.damage_low, self.damage_high)
             accuracy = randint(1, 100)
-            if accuracy > defender.evasion + 25:
-                defender.health = max(defender.health - 50, 0)
+            if accuracy > defender.evasion + 20:
+                defender.health = max(defender.health - attack * 3, 0)
                 self.rage = 0
                 print(
                     '{} unleashed built-up rage, went on a rampaged and severely injured {}'.
                     format(self.name, defender.name))
-                print('"{} dealt 50 DMG"'.format(self.name))
+                print('"{} dealt {} DMG"'.format(self.name, attack * 3))
                 print("（╯°□ °）╯︵（ .o.）")
             else:
                 self.rage = 0
@@ -124,35 +137,35 @@ class Gladiator():
     def evading(self):
         ''' (Gladiator) -> NoneType
 
-        Attacker will use 40 rage to add 45 points of evasion to their evasion stat.
+        Attacker will use 20 rage to add 10 points of evasion to their evasion stat.
         '''
 
-        if self.rage >= 40:
-            self.evasion += 45
-            self.rage -= 40
+        if self.rage >= 20:
+            self.evasion += 10
+            self.rage -= 20
             print('{} is evading'.format(self.name))
             print('ε=ε=ε=┌( o-o)ﾉ')
         else:
             print(
-                '{} attempted to evade but tripped over a pebble\n"40 Rage required'.
+                '{} attempted to evade but tripped over a pebble\n"20 Rage required'.
                 format(self.name))
             print('.︵ /(.□ . \)')
 
     def evading_reset(self):
         ''' (Gladiator) -> NoneType
 
-        Gladiator evasion stat will reset back to 15 after both players' turns end.
+        Gladiator evasion stat will reset back to base after both players' turns end.
         '''
 
-        self.evasion = 15
+        self.evasion = self.base_evasion
 
     def waiting(self):
         ''' (Gladiator) ->
 
-        Gladiator will do nothing for their turn but will gain 20 rage.
+        Gladiator will do nothing for their turn but will gain more rage than from attacking.
         '''
 
-        self.rage = min(self.rage + 20, 100)
+        self.rage = min(self.rage + self.maximum_rage / 5, self.maximum_rage)
         print('{} is waiting'.format(self.name))
         print('(ง-_-)ง')
 
