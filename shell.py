@@ -18,8 +18,8 @@ def get_name_2():
 
 def player(name):
     berserker = Gladiator(name, 100, 100, 0, 150, 15, 20, 15, 15)
-    bladedancer = Gladiator(name, 80, 80, 30, 100, 5, 10, 75, 75)
-    vanguard = Gladiator(name, 150, 150, 0, 100, 5, 15, 30, 30)
+    bladedancer = Gladiator(name, 85, 85, 40, 100, 10, 10, 65, 65)
+    vanguard = Gladiator(name, 150, 150, 0, 100, 10, 15, 25, 25)
     sleep(0.1)
     print('\n')
     sleep(0.1)
