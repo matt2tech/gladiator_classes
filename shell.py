@@ -4,21 +4,57 @@ from core import Scene
 
 
 def get_name_1():
-    name = input('Contestant #1\'s name? ').strip()
+    name = input('Contestant #1\'s name?\n>>> ').strip()
     name = Scene(name)
     return name
 
 
 def get_name_2():
     sleep(1)
-    name = input('Contestant #2\'s name? ').strip()
+    name = input('Contestant #2\'s name?\n>>> ').strip()
     name = Scene(name)
     return name
 
 
 def player(name):
-    player = Gladiator(name, 100, 0, 5, 15, 15)
-    return player
+    berserker = Gladiator(name, 100, 100, 0, 150, 15, 20, 15, 15)
+    bladedancer = Gladiator(name, 90, 90, 30, 100, 5, 10, 70, 70)
+    vanguard = Gladiator(name, 150, 150, 0, 100, 5, 15, 30, 30)
+    sleep(0.1)
+    print('\n')
+    sleep(0.1)
+    print(
+        '--------------------------------------------------------------------------'
+    )
+    sleep(0.1)
+    print('\n')
+    sleep(0.1)
+    print(
+        '1 - Berserkers: Warriors that dish out devastating attacks full of rage!'
+    )
+    sleep(0.1)
+    print('2 - Bladedancers: Warriors that trade power for agility!')
+    sleep(0.1)
+    print('3 - Vanguards: Warriors that rely on their resilience to survive!')
+    sleep(0.1)
+    while True:
+        player_class = input('{}, what is your class?\n>>> '.format(name))
+        if player_class == '1':
+            player_class = berserker
+            break
+        elif player_class == '2':
+            player_class = bladedancer
+            break
+        elif player_class == '3':
+            player_class = vanguard
+            break
+        else:
+            sleep(0.1)
+            print('Invalid choice. Input "1", "2", or "3"')
+            sleep(0.1)
+            print('\n')
+            sleep(0.1)
+    return player_class
 
 
 def player_turn(attacker, defender):
@@ -30,7 +66,7 @@ def player_turn(attacker, defender):
             attacker.attack(defender)
             break
         elif text == '2':
-            Battle.waiting(attacker)
+            attacker.waiting()
             break
         elif text == '3':
             attacker.heal()
@@ -83,14 +119,14 @@ def battle(player_1, player_2):
 
 
 def main():
-    Scene.start_menu()
-    Scene.loading_screen()
-    Scene.sign_up()
+    # Scene.start_menu()
+    # Scene.loading_screen()
+    # Scene.sign_up()
     name_1 = get_name_1()
     name_2 = get_name_2()
     player_1 = player(name_1)
     player_2 = player(name_2)
-    name_1.battle_announce(name_2)
+    # name_1.battle_announce(name_2)
     battle(player_1, player_2)
     Scene.trophy()
     name_1.credits(name_2)
