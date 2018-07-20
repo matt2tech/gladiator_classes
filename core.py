@@ -5,9 +5,9 @@ from time import sleep
 # name, health, total rage, maximum rage, lowest damage, highest damage, evasion percentage
 
 
-# berserker class: Gladiator(name, 100, 100, 0, 150, 15, 20, 15)
-# bladedancer class: Gladiator(name, 80, 80, 40, 100, 5, 10, 65)
-# vanguard class: Gladiator(name, 150, 150, 0, 100, 5, 15, 30)
+# berserker class: Gladiator(name, 100, 100, 0, 150, 15, 20, 15, 15)
+# bladedancer class: Gladiator(name, 85, 85, 30, 100, 5, 10, 70, 70)
+# vanguard class: Gladiator(name, 150, 150, 0, 100, 5, 15, 30, 30)
 class Gladiator():
     '''Represents a gladiator.
 
@@ -334,7 +334,7 @@ class Scene():
         sleep(0.1)
         print('\t / \'|    ()_________)')
         sleep(0.1)
-        print('\t \\ \'/    \\  Sign-Up \\')
+        print('\t \\ \'/    \\  𝓢𝓘𝓖𝓝-𝓤𝓟 \\')
         sleep(0.1)
         print('\t   \\      \\ ~~~~~~~~ \\')
         sleep(0.1)
@@ -367,9 +367,9 @@ class Scene():
         sleep(0.1)
         print('                        | | |               ::::::| | |')
         sleep(0.1)
-        print('                        | | |       Champion::::::| | |')
+        print('                        | | |      𝓒𝓗𝓐𝓜𝓟𝓘𝓞𝓝 ::::::| | |')
         sleep(0.1)
-        print('                         \ \|     of the Arena::::|/ /')
+        print('                         \ \|    𝓞𝓕 𝓣𝓗𝓔 𝓐𝓡𝓔𝓝𝓐 ::::|/ /')
         sleep(0.1)
         print('                          \ ￣               ::::￣ /')
         sleep(0.1)
